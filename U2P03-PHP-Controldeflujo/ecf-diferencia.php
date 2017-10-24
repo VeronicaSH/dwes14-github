@@ -1,25 +1,20 @@
 <html>
 <body>
-<form action="ecf-diferencia.php" method="post">
-Numero 1: <input type="text" name="num1">
-Numero 2: <input type="text" name="num2">
-<input type="submit" name="enviar">
-</form>
+
 <?php
-$num1;
-$num2;
-$res;
-while($num1<=10 && $num2<=10){
-    if($num1>$num2){
-        $res=$num1-$num2;
+$res=0;
+if($_POST["num1"]>1 ||$_POST["num1"]<10 && $_POST["num2"]>1 ||$_POST["num2"]<10 ){
+    
+    if($_POST["num1"]>$_POST["num2"]){
+        $res=$_POST["num1"]-$_POST["num2"];
         while($res!=0){
-            $res-=$res;
+            $res--;
             echo "*";
         }
-    }else if($num1<$num2){
-        $res=$num2-$num1;
+    }else if($_POST["num1"]<$_POST["num2"]){
+        $res=$_POST["num2"]-$_POST["num1"];
         while($res!=0){
-            $res-=$res;
+            $res--;
             echo "*";
         }
     }else{
