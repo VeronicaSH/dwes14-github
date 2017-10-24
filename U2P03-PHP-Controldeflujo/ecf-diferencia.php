@@ -4,7 +4,9 @@
 <?php
 $res=0;
 if($_POST["num1"]>1 ||$_POST["num1"]<10 && $_POST["num2"]>1 ||$_POST["num2"]<10 ){
+    echo "error";
     
+}
     if($_POST["num1"]>$_POST["num2"]){
         $res=$_POST["num1"]-$_POST["num2"];
         while($res!=0){
@@ -20,7 +22,7 @@ if($_POST["num1"]>1 ||$_POST["num1"]<10 && $_POST["num2"]>1 ||$_POST["num2"]<10 
     }else{
         echo "son iguales";
     }
-}
+
 
 ?>
 </body>
