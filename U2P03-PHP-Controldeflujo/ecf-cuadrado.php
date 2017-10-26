@@ -1,45 +1,39 @@
+<!DOCTYPE html>
 <html>
-
-
-<?php
-if(!isset($_POST['enviar'])){
-?>
-<form action="ecf-cuadrado.php" method="post">
-Dimensiones: <input type="text" name="num">
-<input type="submit" name="enviar">
-</form>
-
-<?php
-}
-else{
-    
-    $fondo=true;
-    $texto=0;
-    $filas=$_POST["num"];
-    
-?>
+<head>
+    <meta charset="UTF-8"/>
+</head>
 <body>
-<table border="1">
-<?php 
-    for($i=0;$i<$filas;$i++){
+   <?php
+   if(!isset($_POST['Enviar'])){
+   ?>
+       <form action="ecf-cuadrado.php" method="post">
+           Numero: <input type="number" name="numero">
+           <input type="submit" name="Enviar">
+       </form>
+    <?php
+   }else{
+    $num=$_POST["numero"];
+    ?>
+    <table border="1">
+    <?php     for($i=1;$i<=$num;$i++){
         echo "<tr>";
-        for($j=0;$j<$filas;$j++){
-            if($fondo){
-                echo "<td style=padding:3px;
-                background-color:#blue;>".$texto."</td>";
-                $fondo=false;
-                $texto++; 
-            }else{
-                echo "<td style=padding:3px;>".$texto."</td>";
-                $grey=true;
-                $texto++;
+        if($i%2==0){
+        
+        for($j=1;$j<=$num;$j++){
+            echo "<td style=padding:3px;background-color:lightblue>".$i*$j."</td>";
+        }
+        }
+        if($i%2!=0){
+            for($j=1;$j<=$num;$j++){
+                echo "<td style=padding:3px;>".$i*$j."</td>";
             }
-       
+        }
+        echo "</tr>";
     }
-    } echo "</tr>";
-    
-}
-?>
-</table>
+   }
+    ?>
+    </table>
+    <a href="index.php">VOLVER</a>    
 </body>
 </html>
