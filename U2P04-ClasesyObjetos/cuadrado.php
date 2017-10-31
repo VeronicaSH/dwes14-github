@@ -1,21 +1,29 @@
-<html>
-<body>
+<?php 
 
-<?php
-if(!isset($_POST['enviar'])){
-?>
-<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-Lado: <input type="text" name="num">
-<input type="submit" name="enviar">
-</form>
-<?php
-}
-else{
-    class Cuadrado{
+
+    class Figura{
+        private $color="azul";
+        
+        public function __construct( $c){
+            $this->color=$c;
+            
+        }
+        public function getColor(){
+            return $this->color;
+        }
+        public function setColor($c)
+        {
+            $this->color=$c;
+        }
+        
+    }
+    
+    class Cuadrado extends Figura{
         public $lado;
         
-       function __construct($a){
-           $this->lado=$a;
+       function __construct($color,$lado){
+           parent::__construct($color);
+           $this->lado=$lado;
        }
        public function calcularArea(){
            return $this->lado*$this->lado;
@@ -23,11 +31,15 @@ else{
        public function calcularPerimetro(){
            return 4*$this->lado;
        }
+       public function imprimir(){
+           foreach ($this as $clave => $valor){
+               echo "$clave => $valor\n";
+           }
+       }
        
     }
-    $c1=new Cuadrado($_POST["num"]);
-    echo "<p>Area ".$c1->calcularArea()."</p>";
-    echo "<p>Perimetro ".$c1->calcularPerimetro()."</p>";
+   
 
-}
+
+
 ?>
