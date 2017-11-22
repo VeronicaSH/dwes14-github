@@ -48,12 +48,12 @@ while($fila!=null) {
 	$fila=$resultado->fetch_assoc();
 }
 mysqli_free_result($resultado);
-$resultado=$conexion -> query("SELECT Nombre FROM animal ORDER BY Nombre");
+$resultado=$conexion -> query("SELECT Nombre FROM cuidador ORDER BY Nombre");
 if($resultado->num_rows === 0) echo "<p>No hay cuidadores en la base de datos</p>";
-$fila1=$resultado->fetch_assoc();
-while($fila1!=null){
+$fila=$resultado->fetch_assoc();
+while($fila!=null){
     echo "<hr>";
-    echo "Nombre:" . $fila1['Nombre'];
+    echo "Nombre:" . $fila['Nombre'];
     $fila=$resultado->fetch_assoc();
     
 }
