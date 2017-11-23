@@ -30,6 +30,7 @@ else {
 ?>
 <?php
 $conexion = new mysqli($servidor,$usuario,$clave,"animales");
+$conexion->query("SET NAMES 'UTF8'");
 //si quisiéramos hacerlo en dos pasos:
 // $conexion = new mysqli($servidor,$usuario,$clave);
 // $conexion->select_db("animales");
@@ -53,7 +54,7 @@ if($resultado->num_rows === 0) echo "<p>No hay cuidadores en la base de datos</p
 $fila=$resultado->fetch_assoc();
 while($fila!=null){
     echo "<hr>";
-    echo "Nombre:" . $fila['Nombre'];
+    echo "Cuidador: " . $fila['Nombre'];
     $fila=$resultado->fetch_assoc();
     
 }
