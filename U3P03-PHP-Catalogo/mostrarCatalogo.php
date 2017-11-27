@@ -23,6 +23,7 @@ if ($conexion->connect_errno) {
 <th>Id Autor</th>
 </tr>
 <?php
+//creacion de la tabla
 $resultado=$conexion -> query("SELECT nombre,autor FROM obra ORDER BY nombre");
 if($resultado->num_rows === 0) echo "<p>No hay datos en la Base</p>";
 echo "</tr>";
@@ -31,6 +32,12 @@ while ($obra = $resultado->fetch_object('Obra')) {
     echo "<tr bgcolor='lightgreen'>";
     echo "<td>".$obra -> getAutor()."</td>\n";
     echo "<td>".$obra->getNombre()."</td>\n";
+    //liberamos la variable
+    mysqli_free_result($resultado);
+    //creamos la nueva consulta SELECT
+    echo "<td>".$obra->$resultado=mysql_query("SELECT nombre FROM autor WHERE idAutor=autor")."</td>\n";
     echo "</tr>";
+    
+    
 }
 ?>
