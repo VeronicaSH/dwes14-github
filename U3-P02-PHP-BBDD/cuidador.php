@@ -20,9 +20,6 @@ if ($conexion->connect_errno) {
 if (!isset($_REQUEST["idCuidador"])) die ("<h3>ERROR en la petición. Falta identificador de cuidador</h3>");
 $id = $_REQUEST["idCuidador"];
 
-
-$resultado = $conexion -> query("SELECT * FROM cuidador WHERE idCuidador = ".$id);
-
 // Obtener los datos del cuidador
 $resultado = $conexion -> query("SELECT * FROM cuidador WHERE idCuidador = ".$id);
 if($resultado->num_rows === 0) die ("<h3>ERROR en la petición. Identificador de cuidador no válido</h3>");

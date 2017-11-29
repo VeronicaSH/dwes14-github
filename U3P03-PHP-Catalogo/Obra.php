@@ -5,6 +5,7 @@ class Obra{
     public $genero;
     public $consola;
     public $autor;
+    public $imagen;
     
     public function getIdJuego(){
         return $this->idJuego;
@@ -20,5 +21,8 @@ class Obra{
     }
     public function getAutor(){
         return $this->autor;
+    }
+    public function getImagen(){
+        return $this->imagen;
     }
 }

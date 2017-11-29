@@ -19,25 +19,18 @@ if ($conexion->connect_errno) {
 ?>
 <table style='border:0'>
 <tr style='background-color:lightblue'>
-<th>Nombre</th>
-<th>Id Autor</th>
+<th>Nombre &#9650; &#9660;</th>
+<th>Autor &#9650; &#9660; </th>
 </tr>
 <?php
 //creacion de la tabla
-$resultado=$conexion -> query("SELECT nombre,autor FROM obra ORDER BY nombre");
+$resultado=$conexion -> query("SELECT * from obra,autor WHERE autor.idAutor=obra.autor");
 if($resultado->num_rows === 0) echo "<p>No hay datos en la Base</p>";
-echo "</tr>";
-while ($obra = $resultado->fetch_object('Obra')) {
-    
+while ($obra = $resultado->fetch_assoc() ){
     echo "<tr bgcolor='lightgreen'>";
-    echo "<td>".$obra -> getAutor()."</td>\n";
-    echo "<td>".$obra->getNombre()."</td>\n";
-    //liberamos la variable
-    mysqli_free_result($resultado);
-    //creamos la nueva consulta SELECT
-    echo "<td>".$obra->$resultado=mysql_query("SELECT nombre FROM autor WHERE idAutor=autor")."</td>\n";
+    echo "<td> <a href='mostrarObra.php?idJuego=$obra[Nombre]'> $obra[Nombre]</td>\n";
+    echo "<td> $obra[nombre]</td>\n";
     echo "</tr>";
-    
     
 }
 ?>
