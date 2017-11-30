@@ -19,10 +19,30 @@ if ($conexion->connect_errno) {
 ?>
 <table style='border:0'>
 <tr style='background-color:lightblue'>
-<th>Nombre &#9650; &#9660;</th>
-<th>Autor &#9650; &#9660; </th>
+<th>Nombre <a href="mostrarCatalogo.php?order=1&<?php if($autor!='') echo 'autor='.$autor; ?>"> &#9650</a> 
+<a href="mostrarCatalogo.php?order=0&<?php if($autor!='')echo 'autor='.$autor ;?>"> &#9660</a></th></th>
+<th>Autor<a href="mostrarCatalogo.php?order=1&<?php if($autor!='') echo 'autor='.$autor; ?>"> &#9650</a> 
+<a href="mostrarCatalogo.php?order=0&<?php if($autor!='')echo 'autor='.$autor ;?>"> &#9660</a></th></th>
 </tr>
 <?php
+$order='';
+$numero='';
+if(isset($_REQUEST["order"]) && $_REQUEST["order"]==1){
+    $order='ASC';
+    $numero=1;
+}else{
+    $order='DESC';
+    $numero=0;
+}
+$autor='';
+if(isset($_REQUEST["autor"])){
+    $autor=$_REQUEST["autor"];
+    if (isset($_SESSION['autor'])){
+        $autor=$_SESSION["autor"];}
+        $resultado = $conexion->query('SELECT * FROM obra,autor WHERE obra.autor=autor.idAutor AND autor.Nombre="'.$autor.'" ORDER BY obra.Nombre '. $order);
+}else{
+    $resultado = $conexion->query('SELECT * FROM obra,autor WHERE obra.autor=autor.idAutor ORDER BY autor.Nombre '. $order);
+}
 //creacion de la tabla
 $resultado=$conexion -> query("SELECT * from obra,autor WHERE autor.idAutor=obra.autor");
 if($resultado->num_rows === 0) echo "<p>No hay datos en la Base</p>";
