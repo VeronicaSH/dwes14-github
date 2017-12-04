@@ -7,7 +7,8 @@ $mensajeError="";
 //si la sesion esta iniciada redirigir a index.php
 if (isset($_SESSION["name"])){
     header('Location: index.php');
-}else{
+//si la sesion no esta iniciada y se ha dado a enviar en el formulario
+}elseif(isset($_POST["enviar"])){
 //conexion con la BBDD
 include 'conexion.php';
 //comprobar que el usuario existe en la BBDD
@@ -16,14 +17,15 @@ if(!isset($usuario)){
 //comprobar que la contraseña es correcta
 }elseif(!isset($clave::$contraseña)){
     $mensajeError="la contraseña no coincide";
-
 }else{
     
     
 }
+
 ?>
 
 
 
-<?php     
+<?php   
+//llave del formulario
 }
