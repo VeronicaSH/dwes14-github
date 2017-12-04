@@ -18,12 +18,17 @@ if(!isset($usuario)){
 }elseif(!isset($clave::$contraseña)){
     $mensajeError="la contraseña no coincide";
 }else{
-    
+    header('Location: index.php');
     
 }
 
 ?>
-
+<html>
+<head>Registro</head>
+<body>
+<form action=""></form>
+</body>
+</html>
 
 
 <?php   
