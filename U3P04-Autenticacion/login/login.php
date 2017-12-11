@@ -5,7 +5,7 @@ session_start ();
 include 'conexion.php';
 //inicializar $mensajeError
 $mensajeError="";
-//inicializar ususario, pass y login
+//inicializar usuario, pass y login
 $user=(isset($_POST['user']) ?  $_POST['user']:'');
 $pass=(isset($_POST['pass']) ?  $_POST['pass']:'');
 $login=(isset($_SESSION['login']) ? $_SESSION['login']:0);
@@ -22,7 +22,7 @@ if(isset($_POST["enviar"])){
        $_SESSION['login']=1;
        header('Location:index.php');
    }else{
-       $mensajeError="El usuario y contraseña son incorrectos";
+       $mensajeError="El usuario y contraseÃ±a son incorrectos";
    }
 }  
    ?>
@@ -37,10 +37,10 @@ if(isset($_POST["enviar"])){
                             ContraseÃ±a <input type="text" name="pass" />
                     </p>
                     <p>
-                            <input type="submit" value="enviar" />
+                            <input type="submit" value="enviar" name="enviar"/>
                     </p>
             </form>
-            <p>¿Aun no tienes cuenta?</p>
+            <p>Â¿Aun no tienes cuenta?</p>
             <a href="alta.php">Registrate</a>
             <p><?php if($mensajeError!='')echo $mensajeError;?></p>
      </body>

@@ -1,8 +1,8 @@
 <?php
 //conexion con la BBDD
 $servidor = "localhost";
-$usuario = "alumno_rw";
-$clave = "dwes";
+$usuario = "alumno";
+$clave = "alumno";
 $conexion = new mysqli($servidor,$usuario,$clave,"catalogo14");
 $conexion->query("SET NAMES 'UTF8'");
 if ($conexion->connect_errno) {

@@ -3,7 +3,6 @@
 include 'conexion.php';
 //recuperar la sesion
 session_start ();
-
 //inicializar $mensajeError
 $mensajeError="";
 //inicializar el login y el usuario
@@ -24,7 +23,7 @@ if($resultado->num_rows==0) header('Location:logout.php');
 <?php 
 while ($usuario = $resultado->fetch_assoc()) { 
         echo "<h1>Bienvenido  $usuario[nombre] </h1>";
-        echo "Descripcion: $usuario[descripcion]</p>";
+        echo "<p>Descripcion: $usuario[descripcion]</p>";
         echo "<p>Login: $usuario[login] </p>";
 }
 ?>
