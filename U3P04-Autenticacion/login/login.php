@@ -13,7 +13,6 @@ $login=(isset($_SESSION['login']) ? $_SESSION['login']:0);
 if($login==1){ header('Location:index.php');}
 //si la sesion no esta iniciada y se ha dado a enviar en el formulario
 if(isset($_POST["enviar"])){
-   
    $resultado = $conexion->query('SELECT login,password FROM usuario WHERE login="'.$user.'" AND password="'.$pass.'"');
    //si el resultado de las columnas es 0 asignamos el valor a usuario y pass y redirigimos a index.php
    if($resultado->num_rows!=0){
