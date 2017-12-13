@@ -1,4 +1,5 @@
 <?php
+//IGUAL QUE ALTA PERO CAMBIA LA QUERY
 //conexion con la BBDD
 include 'conexion.php';
 //iniciar sesion
@@ -15,8 +16,9 @@ if(isset($_POST["enviar"])){
         $nombre=$_SESSION["nombre"];
         $desc=$_SESSION["descripcion"];
         $resultado = $conexion->query("SELECT login,password FROM usuario WHERE login='$login'");
-        
+        //elimina el usuario de la BBDD
         $resultado2=$conexion -> query("DELETE FROM usuario WHERE login='$login'");
+        //redirige a logout.php
         header('location:logout.php');
         
 }
