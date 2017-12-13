@@ -1,28 +1,26 @@
 <?php
 //conexion con la BBDD
 include 'conexion.php';
+//iniciar sesion 
+session_start ();
 $mensajeError="";
-$nombre="";
-$login="";
-$pass="";
-$desc="";
-$resultado = $conexion->query('SELECT login,password FROM usuario WHERE login="'.$user.'"');
 if(isset($_POST["enviar"])){
-    $nombre=$_POST['name'];
-    $login=$_POST['user'];
-    $pass=$_POST['pass'];
-    $desc=$_POST['descripcion'];
-    if(isset($_POST["user"])){
-        
-        $mensajeError="El campo usuario esta vacio";
-    }elseif(!isset($_POST["pass"])){
-        $mensajeError="el campo de contraseña esta vacio";
-    }elseif($resultado->num_rows!=0){
-        $mensajeError="ya existe ese usuario en la Base de Datos";
-    }else{
-        $resultado2=$conexion -> query('INSERT INTO usuarios (login,password,nombre,descripcion) 
-        VALUES("'.$login.'","'.$pass.'","'.$nombre.'","'.$desc.'")');
-    }
+$_SESSION["login"]=(isset($_POST['user']) ?  $_POST['user']:'');
+$_SESSION["pass"]=(isset($_POST['pass']) ?  $_POST['pass']:'');
+$_SESSION["nombre"]=(isset($_POST['name']) ? $_POST['name']:'');
+$_SESSION["descripcion"]=(isset($_POST['descripcion']) ? $_POST['descripcion']:'');
+
+$login=$_SESSION["login"];
+$pass=$_SESSION["pass"];
+$nombre=$_SESSION["nombre"];
+$desc=$_SESSION["descripcion"];
+$resultado = $conexion->query("SELECT login,password FROM usuario WHERE login='$login'");
+
+
+$resultado2=$conexion -> query("INSERT INTO usuario (login,password,nombre,descripcion) 
+VALUES('$login','$pass','$nombre','$desc')");
+header('location:login.php');
+    
 }
 ?>
 <html>
@@ -36,7 +34,7 @@ if(isset($_POST["enviar"])){
                             Nombre <input type="text" name="name" />
                     </p>
                     <p>
-                            Contrase�a <input type="text" name="pass" />
+                            Contraseña <input type="text" name="pass" />
                     </p>
                     <p>
                             Descripcion <input type="text" name="descripcion" />
