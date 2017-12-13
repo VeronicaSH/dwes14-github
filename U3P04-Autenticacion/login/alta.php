@@ -15,10 +15,10 @@ $pass=$_SESSION["pass"];
 $nombre=$_SESSION["nombre"];
 $desc=$_SESSION["descripcion"];
 $resultado = $conexion->query("SELECT login,password FROM usuario WHERE login='$login'");
-
-
+//ENCRIPTA LA CONTRASEÑA
+$encriptada=password_hash($pass, PASSWORD_DEFAULT);
 $resultado2=$conexion -> query("INSERT INTO usuario (login,password,nombre,descripcion) 
-VALUES('$login','$pass','$nombre','$desc')");
+VALUES('$login','$encriptada','$nombre','$desc')");
 header('location:login.php');
     
 }

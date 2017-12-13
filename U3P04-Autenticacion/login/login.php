@@ -12,16 +12,22 @@ $login=(isset($_SESSION['login']) ? $_SESSION['login']:0);
 //si el login es 1 {sesion iniciada}
 if($login==1){ header('Location:index.php');}
 //si la sesion no esta iniciada y se ha dado a enviar en el formulario
+
 if(isset($_POST["enviar"])){
-   $resultado = $conexion->query('SELECT login,password FROM usuario WHERE login="'.$user.'" AND password="'.$pass.'"');
+   $resultado = $conexion->query('SELECT login,password FROM usuario WHERE login="'.$user.'" ');
    //si el resultado de las columnas es 0 asignamos el valor a usuario y pass y redirigimos a index.php
-   if($resultado->num_rows!=0){
-       $_SESSION['usuario']=$user;
-       $_SESSION['password']=$pass;
-       $_SESSION['login']=1;
-       header('Location:index.php');
-   }else{
-       $mensajeError="El usuario y contraseña son incorrectos";
+   while($resul=$resultado->fetch_assoc()){
+       $encriptada=$resul['password'];
+       if($resultado->num_rows!=0){
+           $_SESSION['usuario']=$user;
+           $_SESSION['password']=$pass;
+           $_SESSION['login']=1;
+           if(password_verify($pass, $encriptada)){
+           header('Location:index.php');
+           }
+       }else{
+           $mensajeError="El usuario y contraseña son incorrectos";
+       }
    }
 }  
    ?>
