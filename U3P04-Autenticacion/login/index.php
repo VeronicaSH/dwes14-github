@@ -17,7 +17,9 @@ if($resultado->num_rows==0) header('Location:logout.php');
 ?>
 	<html>
 	<head></head>
-	<body>CONTENIDO
+	<body>
+	//mostrar catalogo
+	<a href="http://localhost/U3P03-PHP-Catalogo/mostrarCatalogo.php">Catalogo</a>
 	
     
 <?php 
