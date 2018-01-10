@@ -29,13 +29,13 @@ public class PrimerServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<html><head><meta charset='UTF-8'/><title>Primer Servlet</title></head>");
 		out.println("<body><h1>Primer servlet</h1>");
-		out.println("<h3>Me llamo ...</h3>");
+		out.println("<h3>Me llamo Veronica</h3>");
 		out.println("<p>Ejecución de " + request.getContextPath() + "</p>" + "<br>");
 		out.println("<a href=index.html>Volver</a>");
 		out.println("</body></html>");
 		out.close();
 	}
-	//solo se usara uno de los dos, aun que codifiquemos ambos
+	//una redirige a la otra 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}

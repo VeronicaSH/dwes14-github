@@ -36,7 +36,7 @@ public class fechaHora extends HttpServlet {
 	    out.println("<a href=index.html>Volver</a>" );
 	    out.close();
 	}
-
+ 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
