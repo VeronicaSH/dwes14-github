@@ -6,7 +6,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/EjemploServletGenerico")
+@WebServlet(urlPatterns="/EjemploServletGenerico", loadOnStartup=1)
 public class EjemploServletGenerico extends GenericServlet {
 	private static final long serialVersionUID = 1L;
 

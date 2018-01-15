@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/EjemploServlet")
+@WebServlet(urlPatterns="/EjemploServlet", loadOnStartup=1)
 public class EjemploServlet implements Servlet {
 	private ServletConfig config;
 	private static final long serialVersionUID = 1L;
