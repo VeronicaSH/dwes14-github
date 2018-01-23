@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>U4P05-Java-VariablesServidor</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <context-param>
+  		<param-name>srv_bd</param-name>
+  		<param-value>localhost:3306</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>usr_bd_r</param-name>
+  		<param-value>alumno</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>psw_bd_r</param-name>
+  		<param-value>alumno</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>usr_bd_rw</param-name>
+  		<param-value>alumno_rw</param-value>
+  </context-param>
+  <context-param>
+  		<param-name>psw_bd_rw</param-name>
+  		<param-value>dwes</param-value>
+  </context-param>
+  <servlet>
+  		<servlet-name>MuestraVariablesServidor</servlet-name>
+  		<servlet-class>servlets.MuestraVariablesServidor</servlet-class>
+  		<init-param>
+  			<param-name>servlet3</param-name>
+  			<param-value>alumno</param-value>
+  		</init-param>
+  		<init-param>
+  			<param-name>servlet4</param-name>
+  			<param-value>alumno</param-value>
+  		</init-param>
+  </servlet>
+  
+</web-app>

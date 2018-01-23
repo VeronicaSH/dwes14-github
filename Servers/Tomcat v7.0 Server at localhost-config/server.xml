@@ -125,7 +125,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log." suffix=".txt"/>
 
-      <Context docBase="U4P01-Java-Prueba" path="/U4P01-Java-Prueba" reloadable="true" source="org.eclipse.jst.jee.server:U4P01-Java-Prueba"/><Context docBase=" U4P02-Java-Servlets" path="/_U4P02-Java-Servlets" reloadable="true" source="org.eclipse.jst.jee.server: U4P02-Java-Servlets"/><Context docBase="U4P03-Servlet" path="/U4P03-Servlet" reloadable="true" source="org.eclipse.jst.jee.server:U4P03-Servlet"/><Context docBase="U4P04-Java-DescriptorDeDespliegue" path="/U4P04-Java-DescriptorDeDespliegue" reloadable="true" source="org.eclipse.jst.jee.server:U4P04-Java-DescriptorDeDespliegue"/></Host>
+      <Context docBase="U4P01-Java-Prueba" path="/U4P01-Java-Prueba" reloadable="true" source="org.eclipse.jst.jee.server:U4P01-Java-Prueba"/><Context docBase=" U4P02-Java-Servlets" path="/_U4P02-Java-Servlets" reloadable="true" source="org.eclipse.jst.jee.server: U4P02-Java-Servlets"/><Context docBase="U4P03-Servlet" path="/U4P03-Servlet" reloadable="true" source="org.eclipse.jst.jee.server:U4P03-Servlet"/><Context docBase="U4P04-Java-DescriptorDeDespliegue" path="/U4P04-Java-DescriptorDeDespliegue" reloadable="true" source="org.eclipse.jst.jee.server:U4P04-Java-DescriptorDeDespliegue"/><Context docBase="U4P05-Java-VariablesServidor" path="/U4P05-Java-VariablesServidor" reloadable="true" source="org.eclipse.jst.jee.server:U4P05-Java-VariablesServidor"/></Host>
     </Engine>
   </Service>
 </Server>
