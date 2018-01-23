@@ -57,15 +57,22 @@ public class MuestraVariablesServidor extends HttpServlet {
 		out.println("<tr><td>Directorio de DESPLIEGUE</td><td>" + contexto.getRealPath("/") + "</td></tr>");
 		out.println("<tr><td>Nombre de la aplicación</td><td>" + contexto.getServletContextName() + "</td></tr>");
 		out.println("</table>");
-		out.println("<table style='border-collapse: collapse;margin:10px'>");
-		out.println("<tr><td><b>Variable</b></td><td><b>Valor</b></td></tr>");
+		
+		out.println(" <h3> Parámetros de inicialización del servlet " + request.getServletPath() + "<h3>");
+		out.close();
 		Enumeration <String> parametrosServlet= this.getInitParameterNames();
 		while(parametrosServlet.hasMoreElements()) {
 			String actual=parametrosServlet.nextElement();
-			out.print("<td>" + actual + ": "+ this.getInitParameter(actual));
-			out.print("</td>");
+			out.print("<p>" + actual + ": "+ this.getInitParameter(actual));
+			out.print("<p>");
 		}
-		out.println("</table>");
+		out.close();
+		Enumeration <String> parametros= contexto.getInitParameterNames();
+		while(parametros.hasMoreElements()) {
+			String actual=parametros.nextElement();
+			out.print("<p>" + actual + ": "+ contexto.getInitParameter(actual));
+			out.print("<p>");
+		}
 		out.close();
 		
 		
