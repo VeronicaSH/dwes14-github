@@ -58,22 +58,35 @@ public class MuestraVariablesServidor extends HttpServlet {
 		out.println("<tr><td>Nombre de la aplicación</td><td>" + contexto.getServletContextName() + "</td></tr>");
 		out.println("</table>");
 		
-		out.println(" <h3> Parámetros de inicialización del servlet " + request.getServletPath() + "<h3>");
-		out.close();
+		out.println(" <h3> Parámetros de inicialización del servlet " + request.getServletPath() + "</h3>");
+		
+		//parametros del servlet
+		out.println("<table style='border-collapse: collapse;margin:10px'>");
+		out.println("<tr><td><b>Parametros Inicializacion Servlet</b></td><td><b>Valor</b></td></tr>");
 		Enumeration <String> parametrosServlet= this.getInitParameterNames();
 		while(parametrosServlet.hasMoreElements()) {
 			String actual=parametrosServlet.nextElement();
-			out.print("<p>" + actual + ": "+ this.getInitParameter(actual));
-			out.print("<p>");
+			out.print("<tr><td>"+actual+"</td><td>" + this.getInitParameter(actual) + "</td></tr>");
 		}
-		out.close();
+		out.println("</table>");
+		//parametros del contexto
+		out.println("<table style='border-collapse: collapse;margin:10px'>");
+		out.println("<tr><td><b>Parametros Inicializacion Contexto</b></td><td><b>Valor</b></td></tr>");
 		Enumeration <String> parametros= contexto.getInitParameterNames();
 		while(parametros.hasMoreElements()) {
 			String actual=parametros.nextElement();
-			out.print("<p>" + actual + ": "+ contexto.getInitParameter(actual));
-			out.print("<p>");
+			out.print("<tr><td>"+actual+"</td><td>" + contexto.getInitParameter(actual) + "</td></tr>");
 		}
+		out.println("</table>");
+		//servidor usado en la BBDD
+		out.println("El servidor de bases de datos que usaremos sera " +"<h5>" +contexto.getInitParameter("srv_bd") + "</h5>");
+		
+		//valores del servlet1
+		out.println("<p>El valor del parametro de servlet 1 es "+"<h5>" +this.getInitParameter("servlet1")+"</h5>");
 		out.close();
+		
+		
+		
 		
 		
 	}
