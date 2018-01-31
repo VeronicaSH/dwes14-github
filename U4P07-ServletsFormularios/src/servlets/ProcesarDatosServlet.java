@@ -29,12 +29,17 @@ public class ProcesarDatosServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String nombre=request.getParameter("nombre");
 		String gender=request.getParameter("gender");
-		String [] valores=request.getParameterValues("checkbox");
+		String comentario=request.getParameter("comentario");
+		out.println(nombre);
+		out.println(gender);
+		out.println(comentario);
+		String [] valores=request.getParameterValues("gustos");
 		out.println("<ul>");
 		for(int i=0;i<valores.length;i++) {
 			out.println("<li>" + valores[i] + "</li>");
 		}
 		out.println("</ul>");
+		/*
 		SimpleDateFormat formatoFecha=newSimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date fecha= formatoFecha.parse(request.getParameter("fecha"));
@@ -43,8 +48,8 @@ public class ProcesarDatosServlet extends HttpServlet {
 		} catch (java.text.ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		String comentario=request.getParameter("comentario");
+		}*/
+		
 	}
 
 	
