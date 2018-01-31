@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Formulario</title>
+</head>
+<body>
+
+	<form action="/U4P07-ServletsFormularios/ProcesarDatos" method="post">
+		Nombre:<input type="text" name="nombre" value="nombre"> <br/>
+		Fecha: <input id="date" type="date" name="fecha" value="fecha"><br/>
+		Selecciona Sexo<br/>
+		<input type="radio" name="gender" value="male" checked> Hombre
+  		<input type="radio" name="gender" value="female"> Mujer
+  		<input type="radio" name="gender" value="other"> Otro <br/>
+  		Aficiones<br/>
+  		Salir<input type="checkbox" id="cbox1" value="salir"> 
+		Jugar a videojuegos<input type="checkbox" id="cbox2" value="jugar">
+		Deporte<input type="checkbox" id="cbox3" value="deporte"> <br/>
+		Curso academico </br> 
+  		<select>
+  			<option value="curso">1ºDAW</option>
+			<option value="curso">2ºDAW</option>
+			<option value="curso">1ºASIR</option>
+			<option value="curso">1ºASIR</option>
+		</select>
+		</br>
+		Comentario
+		<input type="textarea" name="comentario" value="comentario">
+		<input type="submit" value="enviar">
+	</form>
+</body>
+</html>
