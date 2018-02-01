@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,10 +27,12 @@ public class InfoSesionServlet extends HttpServlet {
 		// Crear una sesión o recuperar la existente si se encuentra la cookie de sesión
 		HttpSession session = request.getSession();
 		String primeraVez="";
-		boolean reiniciarSesion=false;
-		if(request.getSession(reiniciarSesion) != null) {
-			reiniciarSesion=true;
+		String reiniciarSesion;
+		
+		
+		if(request.getParameter("reiniciarSesion") != null) {
 			session.invalidate();
+			session = request.getSession();
 		}
 		
 		int contador = 0;
@@ -68,7 +71,7 @@ public class InfoSesionServlet extends HttpServlet {
 		            "</ul>" +primeraVez+
 		            
 		        "<p><a href='" + request.getRequestURI() + "'>Refrescar</a></p>");
-		out.println("<p><a href='" + request.getRequestURI() + "?reiniciarSesion=true'>Borrar la sesión</a></p>");
+		out.println("<p><a href='" + request.getRequestURI() + "?reiniciarSesion=true'>Borrar la sesión</a></p>");	
 		out.println("</body></html>");
 		out.close();
 		
