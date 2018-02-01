@@ -7,6 +7,7 @@ import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ public class InfoSesionServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// Crear una sesión o recuperar la existente si se encuentra la cookie de sesión
 		HttpSession session = request.getSession();
 		String primeraVez="";
@@ -44,6 +46,7 @@ public class InfoSesionServlet extends HttpServlet {
 		  session.setAttribute("primeraVez", "Primera Vez en la pagina");
 		  session.setAttribute("contador", 0);
 		  primeraVez=(String) session.getAttribute("primeraVez");
+		  //(duracion de la sesion)session.setMaxInactiveInterval(5);
 		} else {
 		  contador = (int) session.getAttribute("contador");
 		  contador++;
