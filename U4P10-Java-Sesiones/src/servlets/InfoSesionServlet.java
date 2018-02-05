@@ -59,7 +59,6 @@ public class InfoSesionServlet extends HttpServlet {
 		Date fechaInicioSesion = new Date(session.getCreationTime());
 		// Obtener la fecha del último acceso
 		Date fechaUltimoAcceso = new Date(session.getLastAccessedTime());
-
 		// Comienza la salida...
 		PrintWriter out = response.getWriter();
 		out.println("<html><head><meta charset='UTF-8'/>" + "<style> .error {color: red}</style>"

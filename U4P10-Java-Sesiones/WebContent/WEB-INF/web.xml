@@ -9,10 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <!-- duracion de la sesion
-  	<session-config>
-    <session-timeout>1</session-timeout>
-  </session-config> -->
   <session-config>
     <cookie-config>
       <name>idSesion14</name>
