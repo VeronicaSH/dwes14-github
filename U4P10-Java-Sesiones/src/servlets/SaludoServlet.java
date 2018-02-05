@@ -44,12 +44,18 @@ public class SaludoServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				//añadimos el ususario
 				 session.setAttribute("usuario", usuario);
+				 //redirigir a la misma pagina
+				 response.sendRedirect("/SaludoServlet");
 			}
 		}
 			
 		//se empieza a generar la salida HTML
 		out.println("<html><head><meta charset='UTF-8'/>" + "<style> .error {color: red}</style>" + "</head><body>");
-		
+		out.println("<form action='"+request.getRequestURI()+"' method='post'>"
+				+ "<label>Introduce tu nombre para dirigirnos a ti:</label>" + "<input type='text' name='usuario'/>"
+				+ "<span class='error'>" + errorUsuario + "</span><br/>"
+				+ "<input type='submit' name='enviar' value='Enviar'/>"+ "<label>Recargar nombre:</label>" + "<input type='text' name='usuario'/>"+
+				"</form>");
 	}
 
 	
