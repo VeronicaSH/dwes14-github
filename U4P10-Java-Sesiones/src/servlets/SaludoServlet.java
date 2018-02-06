@@ -23,42 +23,56 @@ public class SaludoServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response, Object usuario) throws ServletException, IOException {
-		
-	//variable error
-		String errorUsuario = "";
-		response.setContentType("text/html;charset=UTF-8");
+		//inicio de sesion
+		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
-		//si la sesion es distinta de nulo 
-		if( request.getSession() != null) {
-			//recogemos el parametro de la request
-			usuario = request.getParameter("usuario");
-			out.println("Damos la bienvenida a " + usuario);
-		//si se ha dado a enviar
-		}else if(request.getMethod().equals("POST")) {
-			//validamos el nombre
-			usuario = request.getParameter("usuario");
-			if (usuario == "") {
-				errorUsuario = "Debes introducir un nombre";
-			} else{
-				//creacion de la sesion 
-				HttpSession session = request.getSession();
-				//añadimos el ususario
-				 session.setAttribute("usuario", usuario);
-				 //redirigir a la misma pagina
-				 response.sendRedirect("/SaludoServlet");
+		//variable error
+		String error="";
+		//si el parametro de cerrarSesion es nulo
+		if(request.getParameter("cerrarSesion") !=null) {
+			//cerramos sesion
+			session.invalidate();
+			session = request.getSession();
+			//volver a iniciar
+			response.sendRedirect(request.getRequestURI());
+
+		}
+		//si la sesion es nueva
+		if(session.isNew()) {
+				
+		}else {
+		//si se ha dado a enviar	
+		if (request.getMethod().equals("POST")) {
+				//si el nombre no es nulo se guarda el atributo
+				if (request.getParameter("nombre")!=null) {
+					session.setAttribute("nombre", request.getParameter("nombre"));
+				}else {
+					//si es nulo mensaje de error
+					error="No se ha enviado un nombre";
+				}
 			}
 		}
+		out.println("<html><body>");
+		//si el atributo nombre no es nulo y no esta vacio
+		if(session.getAttribute("nombre")!=null && !session.getAttribute("nombre").equals("") ) {
+			//variable nombre
+			String nombre =session.getAttribute("nombre").toString();
 			
-		//se empieza a generar la salida HTML
-		out.println("<html><head><meta charset='UTF-8'/>" + "<style> .error {color: red}</style>" + "</head><body>");
-		out.println("<form action='"+request.getRequestURI()+"' method='post'>"
-				+ "<label>Introduce tu nombre para dirigirnos a ti:</label>" + "<input type='text' name='usuario'/>"
-				+ "<span class='error'>" + errorUsuario + "</span><br/>"
-				+ "<input type='submit' name='enviar' value='Enviar'/>"+ "<label>Recargar nombre:</label>" + "<input type='text' name='usuario'/>"+
-				"</form>");
-	}
-
-	
+			out.println("<h1>Bienvenido "+nombre+"</h1>");
+			//enlace de cerrar sesion 
+			out.println("<a href='"+request.getRequestURI()+"?cerrarSesion=true'>Cerrar Sesion</a>");
+		}else {
+			//formulario
+			out.println("<form action='"+request.getRequestURI()+"' method='post'>");
+			out.println("<label>Introduce tu nombre:</label> <input type='text' name='nombre'/>");
+			//mensaje de error si no se ha iniciado sesion
+			out.println("<span class='error'>" + error + "</span><br/>");
+			out.println("<input type='submit' name='enviar' value='Enviar'/></form>");
+		}
+		
+		out.println("</body></html>");
+		
+	}	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		doGet(request, response);
