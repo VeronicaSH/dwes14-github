@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/InfoSesionServlet")
+
 public class InfoSesionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
