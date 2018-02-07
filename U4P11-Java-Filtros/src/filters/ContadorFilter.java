@@ -25,11 +25,19 @@ public class ContadorFilter implements Filter {
 
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
+		if(this.getInitParameter("contador")) {
+			
+		}
 		chain.doFilter(request, response);
 	}
 
 	
+	private boolean getInitParameter(String string) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
 	public void init(FilterConfig fConfig) throws ServletException {
 		
 	}
