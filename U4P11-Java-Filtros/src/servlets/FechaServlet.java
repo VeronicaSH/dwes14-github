@@ -35,7 +35,7 @@ public class FechaServlet extends HttpServlet {
 		out.println("<p>Fecha: "+df.format(fecha)+"</p>");
 		out.println("<p><a href='./index.html'>Volver al inicio</a></p>");
 		out.println("</body></html>");
-		out.close();
+		//out.close();
 	}
 
 	

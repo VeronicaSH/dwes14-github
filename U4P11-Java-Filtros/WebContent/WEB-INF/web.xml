@@ -14,9 +14,13 @@
     <servlet-class>servlets.SaludoServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-  	<!--nombre del servlet-->
     <servlet-name>SaludoServlet</servlet-name>
-    <!--URL asociada al nombre-->
     <url-pattern>/Saludo</url-pattern>
   </servlet-mapping>
+  <filter-mapping>
+    <filter-name>FiltroDeRegistro</filter-name>
+    <servlet-name>SaludoServlet</servlet-name>
+    <servlet-name>FechaServlet</servlet-name>
+    <url-pattern>*.html</url-pattern>
+  </filter-mapping>
 </web-app>

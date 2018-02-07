@@ -30,7 +30,7 @@ public class SaludoServlet extends HttpServlet {
 		out.println("<p>¡Hoy es un gran día!</p>");
 		out.println("<p><a href='./index.html'>Volver al inicio</a></p>");
 		out.println("</body></html>");
-		out.close();
+		//out.close();
 	}
 
 	
