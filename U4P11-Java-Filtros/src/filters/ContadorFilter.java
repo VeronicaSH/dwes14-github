@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -25,16 +26,17 @@ public class ContadorFilter implements Filter {
 
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		if(this.getInitParameter("contador")) {
-			
-		}
+		ServletContext contexto=getServletContext();
 		chain.doFilter(request, response);
 	}
 
 	
-	private boolean getInitParameter(String string) {
-		// TODO Auto-generated method stub
-		return false;
+	
+
+
+	private ServletContext getServletContext() {
+		
+		return null;
 	}
 
 
