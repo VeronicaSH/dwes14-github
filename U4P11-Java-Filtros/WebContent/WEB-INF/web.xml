@@ -23,14 +23,16 @@
     <servlet-name>FechaServlet</servlet-name>
     <url-pattern>*.html</url-pattern>
   </filter-mapping>
-   <filter-mapping>
-    <filter-name>WrapFilter</filter-name>
-    <servlet-name>SaludoServlet</servlet-name>
-    <servlet-name>FechaServlet</servlet-name>
-  </filter-mapping>
   <filter-mapping>
     <filter-name>ContadorFilter</filter-name>
     <servlet-name>SaludoServlet</servlet-name>
     <servlet-name>FechaServlet</servlet-name>
   </filter-mapping>
+   <filter-mapping>
+    <filter-name>WrapFilter</filter-name>
+    <servlet-name>SaludoServlet</servlet-name>
+    <servlet-name>FechaServlet</servlet-name>
+     <url-pattern>*.html</url-pattern>
+  </filter-mapping>
+  
 </web-app>
