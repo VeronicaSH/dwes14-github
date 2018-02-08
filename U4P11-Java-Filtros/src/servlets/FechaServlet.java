@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,8 @@ public class FechaServlet extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		ServletContext contexto=getServletContext();
+		System.out.println(contexto.getAttribute("contador"));
 		response.setContentType("text/html;UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<html><head><meta charset='UTF-8'/></head><body>");
