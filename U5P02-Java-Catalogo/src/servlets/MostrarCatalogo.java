@@ -48,7 +48,7 @@ public class MostrarCatalogo extends HttpServlet {
 		  sentencia = conn.createStatement();
 
 		  // Paso 4: Ejecutar la sentencia SQL a través de los objetos Statement
-		  String consulta = "SELECT * from obra";
+		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor";
 		  ResultSet rset = sentencia.executeQuery(consulta);
 		  //detectar si no hay resultados
 		  if (!rset.isBeforeFirst() ) {    
@@ -58,15 +58,13 @@ public class MostrarCatalogo extends HttpServlet {
 		  String img="./img/";
 		  // Paso 5: Mostrar resultados
 		  out.println("<table>");
-		  out.println("<tr>" + "<td>idJuego</td>"+ "<td>Nombre</td>" + "<td>Genero</td>" +  "<td>Consola</td>"+  "<td>Autor</td>"+  "<td>Imagen</td>"+"</tr>" );
+		  out.println("<tr>" + "<td>Nombre</td>" + "<td>Autor</td>"+ "</tr>" );
 		  while (rset.next()) {
-			
-		    out.println("<tr>" + "<td>" + rset.getString("idJuego")+"</td>"+
-		    "<td>"+ rset.getString("Nombre") + "</td>" +
-		    "<td>"+ rset.getString("genero") + "</td>" +
-		    "<td>"+ rset.getString("consola") + "</td>" +
-		    "<td>"+ rset.getString("autor") + "</td>" +
-		    "<td> <img src='  "+img+ rset.getString("Imagen") +"   ' width='100px'></td></tr>");
+			Obra o=new Obra(rset.getString("idJuego"), rset.getString("Nombre"), rset.getString("genero"), rset.getString("consola"), rset.getString("autor"), rset.getString("Imagen"), rset.getString("nombre_autor"));
+			out.println("<tr>" + 
+		    "<td>"+ o.getNombre() + "</td>" +
+		    "<td>"+ o.getNombreAutor() + "</td>" +
+		    "</tr>");
 		  }
 		  out.println("</table>");
 
