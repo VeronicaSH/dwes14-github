@@ -43,12 +43,18 @@ public class MostrarObra extends HttpServlet {
 		  String password = "alumno";
 		  String url = "jdbc:mariadb://localhost/catalogo14";
 		  conn = DriverManager.getConnection(url, userName, password);
+		  String errorNombre="";
 
 		  // Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 		  sentencia = conn.createStatement();
 
+		  //parametro recibido de la request
+		  String idJuego = request.getParameter("idJuego");
+		//si a ocurrido un error
+			
 		  // Paso 4: Ejecutar la sentencia SQL a través de los objetos Statement
-		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor";
+		  String consulta = "SELECT * from obra,autor WHERE (autor.idAutor=obra.autor) AND obra.idJuego="+idJuego;
+		 //comprobar consulta out.println(consulta);
 		  ResultSet rset = sentencia.executeQuery(consulta);
 		  //detectar si no hay resultados
 		  if (!rset.isBeforeFirst() ) {    
@@ -56,11 +62,13 @@ public class MostrarObra extends HttpServlet {
 			}
 		  //variable imagen
 		  String img="./img/";
+		  
+		
 		  // Paso 5: Mostrar resultados
 		  out.println("<table>");
 		  out.println("<tr>" + "<td>IdJuego</td>" + "<td>Nombre</td>" + "<td>Genero</td>"+ "<td>Consola</td>"  + "<td>Autor</td>"+  "<td>Imagen</td>"+ "</tr>"  );
-		  while (rset.next()) {
-			  //objeto de la clase obra
+		  rset.next();
+			//objeto de la clase obra
 			Obra o=new Obra(rset.getString("idJuego"), rset.getString("Nombre"), rset.getString("genero"), rset.getString("consola"), rset.getString("autor"), rset.getString("Imagen"), rset.getString("nombre_autor"));
 			out.println("<tr>" + 
 			//llamada a los get de la clase obra para recuperar los datos
@@ -71,9 +79,9 @@ public class MostrarObra extends HttpServlet {
 		    "<td>"+ o.getNombreAutor() + "</td>" +
 		    "<td> <img src='"+img+ o.getImagen() +"' width='100px'></td></tr>");
 		    
-		  }
+		  
 		  out.println("</table>");
-
+		  
 		  // Paso 6: Desconexión
 		  if (sentencia != null)
 		    sentencia.close();
@@ -85,6 +93,7 @@ public class MostrarObra extends HttpServlet {
 		out.println("</body></html>");
 	
 	}
+	
 		
 	
 

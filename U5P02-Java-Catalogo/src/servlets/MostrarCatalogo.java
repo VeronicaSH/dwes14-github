@@ -58,11 +58,12 @@ public class MostrarCatalogo extends HttpServlet {
 		  String img="./img/";
 		  // Paso 5: Mostrar resultados
 		  out.println("<table>");
-		  out.println("<tr>" + "<td>Nombre</td>" + "<td>Autor</td>"+ "</tr>" );
+		  out.println("<tr>" + "<td>Nombre &#9650  &#9660</td> " + "<td>Autor &#9650  &#9660</td>"+ "</tr>" );
 		  while (rset.next()) {
 			Obra o=new Obra(rset.getString("idJuego"), rset.getString("Nombre"), rset.getString("genero"), rset.getString("consola"), rset.getString("autor"), rset.getString("Imagen"), rset.getString("nombre_autor"));
 			out.println("<tr>" + 
-		    "<td>"+ o.getNombre() + "</td>" +
+			//nombre_obra parametro de mostrar obra
+			"<td><a href='./MostrarObra?idJuego="+o.getIdJuego()+"'>"+o.getNombre()+"</a></td> "+
 		    "<td>"+ o.getNombreAutor() + "</td>" +
 		    "</tr>");
 		  }
