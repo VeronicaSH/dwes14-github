@@ -43,12 +43,21 @@ public class MostrarCatalogo extends HttpServlet {
 		  String password = "alumno";
 		  String url = "jdbc:mariadb://localhost/catalogo14";
 		  conn = DriverManager.getConnection(url, userName, password);
-
+		  String orden="";
+		  String query="";
 		  // Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 		  sentencia = conn.createStatement();
-
-		  // Paso 4: Ejecutar la sentencia SQL a través de los objetos Statement
-		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor";
+		  
+		  if(request.getParameter("orden")!=null && request.getParameter("orden")!="" ) {
+			  orden=request.getParameter("orden");
+			  if(orden.equals("1")) {
+				  query=" ORDER BY obra.Nombre ASC";
+			  }if(orden.equals("2")) {
+				  query= " ORDER BY obra.Nombre DESC";
+			  }
+		  }
+		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor"+query+"";
+		 System.out.println(consulta);
 		  ResultSet rset = sentencia.executeQuery(consulta);
 		  //detectar si no hay resultados
 		  if (!rset.isBeforeFirst() ) {    
@@ -58,7 +67,8 @@ public class MostrarCatalogo extends HttpServlet {
 		  String img="./img/";
 		  // Paso 5: Mostrar resultados
 		  out.println("<table>");
-		  out.println("<tr>" + "<td>Nombre &#9650  &#9660</td> " + "<td>Autor &#9650  &#9660</td>"+ "</tr>" );
+		  //enlaces por parametro para la ordenacion
+		  out.println("<tr>" + "<td>Nombre <a href='./MostrarCatalogo?orden=1'>&#9650  <a href='./MostrarCatalogo?orden=2'>&#9660 </td> " + "<td>Autor <a href='./MostrarCatalogo?orden=1'>&#9650  <a href='./MostrarCatalogo?orden=2'>&#9660 </td>"+ "</tr>" );
 		  while (rset.next()) {
 			Obra o=new Obra(rset.getString("idJuego"), rset.getString("Nombre"), rset.getString("genero"), rset.getString("consola"), rset.getString("autor"), rset.getString("Imagen"), rset.getString("nombre_autor"));
 			out.println("<tr>" + 
@@ -68,7 +78,7 @@ public class MostrarCatalogo extends HttpServlet {
 		    "</tr>");
 		  }
 		  out.println("</table>");
-
+		  
 		  // Paso 6: Desconexión
 		  if (sentencia != null)
 		    sentencia.close();
@@ -78,7 +88,7 @@ public class MostrarCatalogo extends HttpServlet {
 		  e.printStackTrace();
 		}
 		out.println("</body></html>");
-	
+		
 	}
 
 	
