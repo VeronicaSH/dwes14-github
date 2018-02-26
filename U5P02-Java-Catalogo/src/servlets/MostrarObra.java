@@ -50,12 +50,23 @@ public class MostrarObra extends HttpServlet {
 
 		  //parametro recibido de la request
 		  String idJuego = request.getParameter("idJuego");
-		//si a ocurrido un error
+		  //parametro de la request de idAutor
+		  String idAutor=request.getParameter("idAutor");
+		
+		  //creacion de la consulta de idAutor
+		  String consulta2="SELECT * from obra,autor WHERE (autor.idAutor=obra.autor) AND autor.idAutor="+idAutor;
 			
 		  // Paso 4: Ejecutar la sentencia SQL a través de los objetos Statement
 		  String consulta = "SELECT * from obra,autor WHERE (autor.idAutor=obra.autor) AND obra.idJuego="+idJuego;
-		 //comprobar consulta out.println(consulta);
+		  //primera consulta
 		  ResultSet rset = sentencia.executeQuery(consulta);
+		  //segunda consulta
+		  ResultSet resultado = sentencia.executeQuery(consulta2);
+		  
+		  
+		  
+		  
+		  
 		  //detectar si no hay resultados
 		  if (!rset.isBeforeFirst() ) {    
 			    out.println("<h3>No hay resultados</p>");

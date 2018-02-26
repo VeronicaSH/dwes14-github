@@ -45,6 +45,8 @@ public class MostrarCatalogo extends HttpServlet {
 		  conn = DriverManager.getConnection(url, userName, password);
 		  String orden="";
 		  String query="";
+		  String id="";
+		  String query2="";
 		  // Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 		  sentencia = conn.createStatement();
 		  
@@ -56,13 +58,19 @@ public class MostrarCatalogo extends HttpServlet {
 				  query= " ORDER BY obra.Nombre DESC";
 			  }
 		  }
-		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor"+query+"";
+		  if(request.getParameter("idAutor")!=null && request.getParameter("idAutor")!="" ) {
+			  id=request.getParameter("idAutor");
+			  query2="AND autor.idAutor="+id;
+			  
+		  }
+		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor"+query+query2;
 		 System.out.println(consulta);
 		  ResultSet rset = sentencia.executeQuery(consulta);
 		  //detectar si no hay resultados
 		  if (!rset.isBeforeFirst() ) {    
 			    out.println("<h3>No hay resultados</p>");
 			}
+		  Autor aut=new Autor(((Autor) rset).getid(),((Autor) rset).getNombre());
 		  //variable imagen
 		  String img="./img/";
 		  // Paso 5: Mostrar resultados
@@ -74,7 +82,7 @@ public class MostrarCatalogo extends HttpServlet {
 			out.println("<tr>" + 
 			//nombre_obra parametro de mostrar obra
 			"<td><a href='./MostrarObra?idJuego="+o.getIdJuego()+"'>"+o.getNombre()+"</a></td> "+
-		    "<td>"+ o.getNombreAutor() + "</td>" +
+		    "<td><a href='./MostrarCatalogo?idAutor="+o.getAutor()+"'>"+ o.getNombreAutor() + "</td>" +
 		    "</tr>");
 		  }
 		  out.println("</table>");
