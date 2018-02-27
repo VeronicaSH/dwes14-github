@@ -63,14 +63,14 @@ public class MostrarCatalogo extends HttpServlet {
 			  query2="AND autor.idAutor="+id;
 			  
 		  }
-		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor"+query+query2;
+		  String consulta = "SELECT * from obra,autor WHERE autor.idAutor=obra.autor"+query+"";
 		 System.out.println(consulta);
 		  ResultSet rset = sentencia.executeQuery(consulta);
 		  //detectar si no hay resultados
 		  if (!rset.isBeforeFirst() ) {    
 			    out.println("<h3>No hay resultados</p>");
 			}
-		  Autor aut=new Autor(((Autor) rset).getid(),((Autor) rset).getNombre());
+		 
 		  //variable imagen
 		  String img="./img/";
 		  // Paso 5: Mostrar resultados
@@ -78,6 +78,7 @@ public class MostrarCatalogo extends HttpServlet {
 		  //enlaces por parametro para la ordenacion
 		  out.println("<tr>" + "<td>Nombre <a href='./MostrarCatalogo?orden=1'>&#9650  <a href='./MostrarCatalogo?orden=2'>&#9660 </td> " + "<td>Autor <a href='./MostrarCatalogo?orden=1'>&#9650  <a href='./MostrarCatalogo?orden=2'>&#9660 </td>"+ "</tr>" );
 		  while (rset.next()) {
+			Autor a=new Autor(rset.getString("idAutor"),rset.getString("nombre_autor"));
 			Obra o=new Obra(rset.getString("idJuego"), rset.getString("Nombre"), rset.getString("genero"), rset.getString("consola"), rset.getString("autor"), rset.getString("Imagen"), rset.getString("nombre_autor"));
 			out.println("<tr>" + 
 			//nombre_obra parametro de mostrar obra
