@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>U5P03-Java-Autenticacion</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <context-param>
+	<param-name>srv_db</param-name>
+	<param-value>jdbc:mariadb://localhost:3306</param-value>
+  </context-param>
+  <!-- Usuario con permisos de lectura  -->
+	<context-param>
+			<param-name>usr_db_r</param-name>
+			<param-value>alumno</param-value>
+	</context-param>
+	<context-param>
+			<param-name>usr_db_rw</param-name>
+			<param-value>alumno_rw</param-value>
+	</context-param>
+
+	<!-- Usuario con permisos de lectura y escritura -->
+	<context-param>
+			<param-name>psw_db_r</param-name>
+			<param-value>alumno</param-value>
+	</context-param>
+	<context-param>
+			<param-name>psw_db_rw</param-name>
+			<param-value>dwes</param-value>
+	</context-param>
+</web-app>
