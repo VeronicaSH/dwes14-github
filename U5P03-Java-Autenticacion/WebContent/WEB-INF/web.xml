@@ -10,26 +10,31 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
-	<param-name>srv_db</param-name>
-	<param-value>jdbc:mariadb://localhost:3306</param-value>
+    <param-name>srv_db</param-name>
+    <param-value>jdbc:mariadb://localhost:3306</param-value>
   </context-param>
-  <!-- Usuario con permisos de lectura  -->
-	<context-param>
-			<param-name>usr_db_r</param-name>
-			<param-value>alumno</param-value>
-	</context-param>
-	<context-param>
-			<param-name>usr_db_rw</param-name>
-			<param-value>alumno_rw</param-value>
-	</context-param>
-
-	<!-- Usuario con permisos de lectura y escritura -->
-	<context-param>
-			<param-name>psw_db_r</param-name>
-			<param-value>alumno</param-value>
-	</context-param>
-	<context-param>
-			<param-name>psw_db_rw</param-name>
-			<param-value>dwes</param-value>
-	</context-param>
+  <context-param>
+    <param-name>usr_db_r</param-name>
+    <param-value>alumno</param-value>
+  </context-param>
+  <context-param>
+    <param-name>usr_db_rw</param-name>
+    <param-value>alumno_rw</param-value>
+  </context-param>
+  <context-param>
+    <param-name>psw_db_r</param-name>
+    <param-value>alumno</param-value>
+  </context-param>
+  <context-param>
+    <param-name>psw_db_rw</param-name>
+    <param-value>dwes</param-value>
+  </context-param>
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>filters.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
 </web-app>
