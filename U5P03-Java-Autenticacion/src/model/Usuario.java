@@ -44,6 +44,9 @@ public class Usuario {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+	public boolean isAdministrador() {
+		return admin;
+	}
 	
 
 	

@@ -105,7 +105,6 @@ public class MostrarObra extends HttpServlet {
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
-		out.println("</body></html>");
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		out.println("<h4>Sesión iniciada como <a href='"+request.getRequestURI()+"/Cuenta'>" 

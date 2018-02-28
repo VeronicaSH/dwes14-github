@@ -1,4 +1,4 @@
-package servlets;
+package cuenta;
 
 import java.io.IOException;
 

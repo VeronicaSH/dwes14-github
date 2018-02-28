@@ -164,7 +164,6 @@ public class MostrarCatalogo extends HttpServlet {
 		} catch (Exception e) {
 		  e.printStackTrace();
 		}
-		out.println("</body></html>");
 		
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
