@@ -36,6 +36,7 @@ public class Loginfilter implements Filter {
 		String uri = request.getRequestURI();
 		HttpSession session = request.getSession(false); // si no existe no la creamos // L2
 		String errorSesion = ""; // L3
+		System.out.print("pasa");
 		// comprobamos posibles errores:
 	  	// a. Aviso: intento de acceso sin sesión iniciada
 	  	// b. Aviso: existe sesión iniciada pero no contiene usuario

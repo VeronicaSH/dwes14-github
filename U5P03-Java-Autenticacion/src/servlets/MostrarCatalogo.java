@@ -13,9 +13,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.Autor;
 import model.Obra;
+import model.Usuario;
 
 
 @WebServlet("/Catalogo")
@@ -164,6 +166,11 @@ public class MostrarCatalogo extends HttpServlet {
 		}
 		out.println("</body></html>");
 		
+		HttpSession session = request.getSession();
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		out.println("<h4>Sesión iniciada como <a href='"+request.getRequestURI()+"/Cuenta'>" 
+			+ usuario.getNombre_usuario() + "</a></h4>");
+		out.println("</body></html>");
 	}
 
 	

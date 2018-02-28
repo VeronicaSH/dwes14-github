@@ -31,7 +31,7 @@
   </context-param>
   <filter>
     <filter-name>LoginFilter</filter-name>
-    <filter-class>filters.LoginFilter</filter-class>
+    <filter-class>filtros.Loginfilter</filter-class>
   </filter>
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
