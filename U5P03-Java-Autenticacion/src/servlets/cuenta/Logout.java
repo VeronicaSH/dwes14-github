@@ -1,4 +1,4 @@
-package cuenta;
+package servlets.cuenta;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class Logout extends HttpServlet {
 		ServletContext contexto=request.getServletContext();
 		if(session!=null) {
 			session.invalidate();
-			response.sendRedirect(contexto.getContextPath() + "/login");
+			response.sendRedirect(contexto.getContextPath() + "/Login");
 		}else {
 			System.out.println("Error: No hay sesion iniciada");
 		}

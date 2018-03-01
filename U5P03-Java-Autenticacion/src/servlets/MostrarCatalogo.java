@@ -167,7 +167,7 @@ public class MostrarCatalogo extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		out.println("<h4>Sesión iniciada como <a href='"+request.getRequestURI()+"/Cuenta'>" 
+		out.println("<h4>Sesión iniciada como <a href='"+contexto.getContextPath()+"/Cuenta'>" 
 			+ usuario.getNombre_usuario() + "</a></h4>");
 		out.println("</body></html>");
 	}
