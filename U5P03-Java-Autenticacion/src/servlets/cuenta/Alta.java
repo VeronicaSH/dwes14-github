@@ -36,8 +36,9 @@ public class Alta extends HttpServlet {
 		if(request.getParameter("enviar")!=null) {
 			try {
 				Class.forName("org.mariadb.jdbc.Driver").newInstance();
-				 String userName = "alumno";
-				 String password = "alumno";
+				//para modificar la BBDD usar este usuario
+				 String userName = "alumno_rw";
+				 String password = "dwes";
 				 String url = "jdbc:mariadb://localhost/catalogo14";
 				  conn = DriverManager.getConnection(url, userName, password);
 				sentencia = conn.createStatement();
@@ -60,18 +61,18 @@ public class Alta extends HttpServlet {
 		}
 		response.setContentType("text/html;UTF-8");
 		out.println("<html><head><meta charset='UTF-8'/>" + "<style> .error {color: red}</style>"
-			+ "<title>Catálogo de Nombre Apellidos</title></head><body>");
+			+ "<title>Catï¿½logo de Nombre Apellidos</title></head><body>");
 				out.println("<h3>Alta de usuario</h3>");
 				out.println("<form action='"+request.getRequestURI()+"' method='post'>"
 			+ "<label>Usuario:</label><input type='text' name='username'><br/>\n"
-			+ "<label>Contraseña:</label><input type='password' name='password'><br/>\n"
+			+ "<label>Contraseï¿½a:</label><input type='password' name='password'><br/>\n"
 			+ "<label>Nombre:</label><input type='text' name='nombre'><br/>\n"
 			+ "<label>Admin:</label> No <input type='radio' name='admin' value='0' checked/>\n"
-			+ " Sí <input type='radio' name='admin' value='1'/><br/>\n"
-			+ "<label>Descripción:</label><input type='textarea' name='descripcion'><br/>\n"
+			+ " Sï¿½ <input type='radio' name='admin' value='1'/><br/>\n"
+			+ "<label>Descripciï¿½n:</label><input type='textarea' name='descripcion'><br/>\n"
 			+ "<input type='submit' value='Crear usuario' name='enviar'>\n"
 			+ "</form>\n"
-			+ "<p><a href='"+contexto.getContextPath()+"/Login'>¿Ya estás registrado? Haz clic en este enlace</a></p>\n"
+			+ "<p><a href='"+contexto.getContextPath()+"/Login'>ï¿½Ya estï¿½s registrado? Haz clic en este enlace</a></p>\n"
 			+ "<h3>"+mensajeError+"</h3>\n");
 		out.println("</body></html>");
 		

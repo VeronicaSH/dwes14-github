@@ -42,6 +42,7 @@ public class Loginfilter implements Filter {
 	  	// b. Aviso: existe sesión iniciada pero no contiene usuario
 	  	// c. Aviso: existe sesión iniciada pero el usuario no existe en la base de datos
 		// redirigir en caso de error, salvo en excepciones
+		//todo lo que no termine en eso, redirige a login
 		if( !errorSesion.isEmpty() && !(uri.endsWith("html") || uri.endsWith("Login") || uri.endsWith("Alta"))){ // L4
 			contexto.log(errorSesion + " - " + uri);
 			response.sendRedirect(contexto.getContextPath()+"/Login");

@@ -27,17 +27,20 @@ public class Baja extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession(false);
+		System.out.println(session.getAttribute("login"));
 		String UserSesion=(String) session.getAttribute("login");
 		ServletContext contexto=getServletContext();
 		Connection conn = null;Statement sentencia = null;
 		String consultaComprobacion = "SELECT * from usuario WHERE login='"+session.getAttribute("login")+"'";
-		//String borrado= "";
+		
+		
 		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver").newInstance();
-			 String userName = "alumno";
-			 String password = "alumno";
+			 String userName = "alumno_rw";
+			 String password = "dwes";
 			 String url = "jdbc:mariadb://localhost/catalogo14";
 			 conn = DriverManager.getConnection(url, userName, password);
 			sentencia = conn.createStatement();

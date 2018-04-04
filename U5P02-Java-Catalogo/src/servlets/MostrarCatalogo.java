@@ -122,7 +122,7 @@ public class MostrarCatalogo extends HttpServlet {
 				  Autor a=new Autor(rset.getString("idAutor"),rset.getString("nombre_autor"));
 				  out.println("<tr>" + "<td>"+a.getid()+"</td>"+ "<td>"+a.getNombre()+"</td>"+"<td>"+o.getNombre()+"</td>"+ "</tr>");
 			  }
-			  out.println("<a href='/U5P02-Java-Catalogo/MostrarCatalogo '> Volver");
+			  out.println("<a href='./MostrarCatalogo '> Volver </a>");
 			  
 			  
 		  //OBRAS
