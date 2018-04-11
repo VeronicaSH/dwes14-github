@@ -78,6 +78,7 @@ public class disco extends HttpServlet {
 				  String consulta2="SELECT * from temas WHERE id_disco='"+id+"'";
 				  out.println(consulta2);
 				  ResultSet rset2 = sentencia.executeQuery(consulta2);
+				  out.println("<h1>Listado de canciones<h1>");
 				  out.println("<table border=1>");
 				  out.println("<tr>" + "<td>Numero </td>"+"<td> Titulo</td>" + "<td> Duracion</td>"+"</tr>" );
 				  while(rset2.next()) {
@@ -92,6 +93,11 @@ public class disco extends HttpServlet {
 					
 					out.println("</tr>");
 				  }
+				  //out.println("<h1>Listado de comentarios<h1>");
+				  
+				  out.println(rset.getString("texto"));
+				  
+				  
 		}
 		
 		  
