@@ -48,27 +48,74 @@ public class index extends HttpServlet {
 		  conn = DriverManager.getConnection(url, userName, password);
 		  String tipo="";
 		  String img="./img/discografia/";
+		  String orden="";
+		  String query="";
 		  
 		  // Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 		  sentencia = conn.createStatement();
+		  
+		//ORDENACION
+		  if(request.getParameter("orden")!=null && request.getParameter("orden")!="" ) {
+			  orden=request.getParameter("orden");
+			  if(orden.equals("1")) {
+				  query=" ORDER BY nombre ASC";
+			  }if(orden.equals("2")) {
+				  query= " ORDER BY nombre DESC";
+			  }
+		  }
+		
+		  
 		//consulta basica
 		  String consulta = "SELECT DISTINCT tipo FROM discos";
+		//BUSQUEDA
+		  if(request.getParameter("busqueda")!=null) {
+			  String busqueda= request.getParameter("busqueda");
+			  String[] arBusqueda= busqueda.split(" ");
+			  if(arBusqueda.length>1) {
+				  for(int i=0; i<arBusqueda.length;i++) {
+					  if(i==0) {
+					  	consulta+=" AND (nombre LIKE '%"+arBusqueda[i]+"%'"; 
+					  }
+					  if(i>0) {
+						consulta+=" OR nombre LIKE '%"+arBusqueda[i]+"%'"; 
+					  }
+					  if(i==arBusqueda.length-1) {
+						consulta+=" OR nombre LIKE '%"+arBusqueda[i]+"%')"; 
+					  }
+				  }
+			  }else {
+					consulta+=" AND nombre LIKE '%"+busqueda+"%'"; 
+			  }
+		  }
 		  if(request.getParameter("tipo")!=null && request.getParameter("tipo")!="" ) {
 			  tipo=request.getParameter("tipo");
-			  consulta="SELECT * from discos WHERE tipo='"+tipo+"'";
+			  consulta="SELECT * from discos WHERE tipo='"+tipo+"'"+query;
+			  out.println(consulta);
 			  
 		  }
 		  
 		  //ejecucion de la consulta
 		  ResultSet rset = sentencia.executeQuery(consulta);
 		  out.println("<table border=1>");
+		  //disco con el parametro tipo
 		  if(request.getParameter("tipo")!=null) {
 			  out.println("<h1>"+tipo+"</h1>");
-			  out.println("<tr>" + "<td>Titulo</td>"+"<td> Discografica</td>" + "<td> Año</td>"+"<td> Formato</td>"+"<td>Imagen</td>"+"</tr>" );
+			  out.println("<tr>" + "<td>Titulo <a href='./index?tipo="+tipo+"&orden=1'>&#9650  <a href='./index?tipo="+tipo+"&orden=2'>&#9660 </td>"+"<td> Discografica</td>" + "<td> Año</td>"+"<td> Formato</td>"+"<td>Imagen</td>"+"</tr>" );
 			  while(rset.next()) {
-				  out.println("<tr>" + "<td>"+rset.getString("nombre")+"</td>"+ "<td>"+rset.getString("discografica")+"</td>"+"<td>"+rset.getString("year")+"<td>"+rset.getString("soporte")+"</td>"+  "<td> <img src='"+img+ rset.getString("imagen")+".jpg" +"' width='100px'></td></tr>");
+				  out.println("<tr>" + "<td>"+rset.getString("nombre")+"</td>"+
+				  "<td>"+rset.getString("discografica")+
+				  "</td>"+"<td>"+rset.getString("year")+
+				  "<td>"+rset.getString("soporte")+"</td>"+ 
+				  "<td><a href='./disco?id="+rset.getString("id")+"'> <img src='"+img+ rset.getString("imagen")+".jpg" +"' width='100px'/></a></td></tr>");
 			  }	
+			//FORMULARIO BUSQUEDA
+			  out.println("<form>"); 
+			  out.println("<form action='/Practica1/index?tipo="+tipo+"' method='post'>"
+						+ "Buscar por Obra:<input type='text' name='busqueda'  placeholder='Buscar'/><br>"
+						+ "<input type='submit' name='buscar'><br><br>"
+						+ "</form><br><br><br><br>");
 			  out.println("<a href='./index '> Volver </a>");
+			  //si no recibe parametro, las distintas categorias
 		  }else {
 		  out.println("<ul>" + "<li>Categorias</li>"+"</ul>" );
 		  
@@ -79,6 +126,10 @@ public class index extends HttpServlet {
 			  }
 		  }
 		  out.println("</table>");
+		  
+		
+		  
+		  
 		  // Paso 6: Desconexión
 		  if (sentencia != null)
 		    sentencia.close();
