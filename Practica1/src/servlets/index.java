@@ -90,7 +90,7 @@ public class index extends HttpServlet {
 		  if(request.getParameter("tipo")!=null && request.getParameter("tipo")!="" ) {
 			  tipo=request.getParameter("tipo");
 			  consulta="SELECT * from discos WHERE tipo='"+tipo+"'"+query;
-			  out.println(consulta);
+			  //out.println(consulta);
 			  
 		  }
 		  

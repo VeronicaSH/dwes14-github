@@ -46,6 +46,7 @@ public class disco extends HttpServlet {
 				  conn = DriverManager.getConnection(url, userName, password);
 				  String id="";
 				  String img="./img/discografia/";
+				 
 				  
 				  
 				  // Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
@@ -55,13 +56,12 @@ public class disco extends HttpServlet {
 		//parametro del id
 		//ejecucion de la consulta
 		  ResultSet rset = sentencia.executeQuery(consulta);
-		 
 		  
 		if(request.getParameter("id")!=null) {
 			//DISCO
 			  id=request.getParameter("id");
 			  consulta="SELECT * from discos WHERE id='"+id+"'";
-			  out.println(consulta );
+			  //out.println(consulta );
 			  rset = sentencia.executeQuery(consulta);
 			  rset.next();
 			  out.println("<img src='"+img+ rset.getString("imagen")+".jpg" +"' width='100px'/>");
@@ -74,12 +74,14 @@ public class disco extends HttpServlet {
 				"<td>"+rset.getString("year")+"</td>"+
 				"<td>"+rset.getString("soporte")+"</td>"+
 				"</tr>");
+				  out.println("</table>");
 			//CANCIONES
 				  String consulta2="SELECT * from temas WHERE id_disco='"+id+"'";
-				  out.println(consulta2);
+				  //out.println(consulta2);
 				  ResultSet rset2 = sentencia.executeQuery(consulta2);
-				  out.println("<h1>Listado de canciones<h1>");
+				 
 				  out.println("<table border=1>");
+				  out.println("<h1>Listado de canciones<h1>");
 				  out.println("<tr>" + "<td>Numero </td>"+"<td> Titulo</td>" + "<td> Duracion</td>"+"</tr>" );
 				  while(rset2.next()) {
 					  out.println("<tr>" );
@@ -92,17 +94,20 @@ public class disco extends HttpServlet {
 					  }
 					
 					out.println("</tr>");
+					
 				  }
-				  //out.println("<h1>Listado de comentarios<h1>");
-				  
+				  out.println("</table>");
+				  out.println("<h1>Listado de comentarios</h1>");
 				  out.println(rset.getString("texto"));
+				  
+				  out.println("<a href='./index?tipo="+rset.getString("tipo")+"'> Volver </a>");
+				 
+				 
 				  
 				  
 		}
-		
-		  
-		 out.println("</table>");
-		  out.println("</table>");
+		 
+		 
 		// Paso 6: Desconexión
 		  if (sentencia != null)
 		    sentencia.close();
