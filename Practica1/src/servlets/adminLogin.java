@@ -117,8 +117,7 @@ public class adminLogin extends HttpServlet {
 					+ "<label>Usuario:</label><input type='text' name='login'><br/>"
 					+ "<label>Contraseña:</label><input type='password' name='password'><br/>"
 					+ "<input type='submit' value='Iniciar sesión' name='enviar'>" 
-                    + "</form>" + "<p><a href='"
-					+ contexto.getContextPath() + "/Baja'> Haz clic en este enlace para dar de baja temas</a></p>"
+                    + "</form>" 
 					+ "<h3>" + mensajeError + "</h3>");
 
 			out.println("</body></html>");

@@ -49,24 +49,27 @@ public class index extends HttpServlet {
 		  String tipo="";
 		  String img="./img/discografia/";
 		  String orden="";
-		  String query="";
+		  String ConsultaBusqueda="";
+		  String ConsultaOrden="";
 		  
 		  // Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 		  sentencia = conn.createStatement();
 		  
+		//consulta basica
+		  String consulta = "SELECT DISTINCT tipo FROM discos";
 		//ORDENACION
 		  if(request.getParameter("orden")!=null && request.getParameter("orden")!="" ) {
 			  orden=request.getParameter("orden");
 			  if(orden.equals("1")) {
-				  query=" ORDER BY nombre ASC";
+				  ConsultaOrden=" ORDER BY nombre ASC";
 			  }if(orden.equals("2")) {
-				  query= " ORDER BY nombre DESC";
+				  ConsultaOrden= " ORDER BY nombre DESC";
 			  }
 		  }
 		
 		  
-		//consulta basica
-		  String consulta = "SELECT DISTINCT tipo FROM discos";
+		
+		  
 		//BUSQUEDA
 		  if(request.getParameter("busqueda")!=null) {
 			  String busqueda= request.getParameter("busqueda");
@@ -74,23 +77,26 @@ public class index extends HttpServlet {
 			  if(arBusqueda.length>1) {
 				  for(int i=0; i<arBusqueda.length;i++) {
 					  if(i==0) {
-					  	consulta+=" AND (nombre LIKE '%"+arBusqueda[i]+"%'"; 
+						  ConsultaBusqueda+=" AND nombre LIKE '%"+arBusqueda[i]+"%'"; 
 					  }
 					  if(i>0) {
-						consulta+=" OR nombre LIKE '%"+arBusqueda[i]+"%'"; 
+						  ConsultaBusqueda+=" AND nombre LIKE '%"+arBusqueda[i]+"%'"; 
 					  }
 					  if(i==arBusqueda.length-1) {
-						consulta+=" OR nombre LIKE '%"+arBusqueda[i]+"%')"; 
+						  ConsultaBusqueda+=" AND nombre LIKE '%"+arBusqueda[i]+"%'"; 
 					  }
 				  }
 			  }else {
-					consulta+=" AND nombre LIKE '%"+busqueda+"%'"; 
+				  ConsultaBusqueda+=" AND nombre LIKE '%"+busqueda+"%'"; 
 			  }
+			  
 		  }
+		  
+		  
 		  if(request.getParameter("tipo")!=null && request.getParameter("tipo")!="" ) {
 			  tipo=request.getParameter("tipo");
-			  consulta="SELECT * from discos WHERE tipo='"+tipo+"'"+query;
-			  //out.println(consulta);
+			  consulta="SELECT * from discos WHERE tipo='"+tipo+"'"+ ConsultaBusqueda + ConsultaOrden ;
+			  out.println(consulta);
 			  
 		  }
 		  
@@ -110,14 +116,17 @@ public class index extends HttpServlet {
 			  }	
 			//FORMULARIO BUSQUEDA
 			  out.println("<form>"); 
-			  out.println("<form action='/Practica1/index?tipo="+tipo+"' method='post'>"
-						+ "Buscar por Obra:<input type='text' name='busqueda'  placeholder='Buscar'/><br>"
-						+ "<input type='submit' name='buscar'><br><br>"
+			  out.println("<form action='/Practica1/index method='post'>"
+						+ "Buscar por Titulo:<input type='text' name='busqueda'  placeholder='Buscar'/><br>"
+						+ "<input type='hidden' name='tipo'  value='"+tipo+"''/><br>"
+						+ "<input type='submit' name='enviar'><br><br>"
 						+ "</form><br><br><br><br>");
-			  out.println("<a href='./index '> Volver </a>");
+			  out.println("<a href='./index '> Volver </a>"
+			  		+ "</br>");
+			  out.println("<a href='./Login '> Login </a>");
 			  //si no recibe parametro, las distintas categorias
 		  }else {
-		  out.println("<ul>" + "<li>Categorias</li>"+"</ul>" );
+		  out.println( "<h1>Categorias</h1>" );
 		  
 			  while(rset.next()) {
 				  out.println("<ul>" +

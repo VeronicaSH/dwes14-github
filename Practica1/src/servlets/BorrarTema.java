@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/Baja")
-public class adminBaja extends HttpServlet {
+@WebServlet("/Borrar")
+public class BorrarTema extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    
-    public adminBaja() {
+   
+    public BorrarTema() {
         super();
-        
+       
     }
 
 	
@@ -33,9 +32,8 @@ public class adminBaja extends HttpServlet {
 		String UserSesion=(String) session.getAttribute("login");
 		ServletContext contexto=getServletContext();
 		Connection conn = null;Statement sentencia = null;
-		PrintWriter out = response.getWriter();
 		String consultaComprobacion = "SELECT * from usuario WHERE login='"+session.getAttribute("login")+"'";
-		String consulta="SELECT * FROM temas ";
+		
 		
 		
 		try {
@@ -45,25 +43,14 @@ public class adminBaja extends HttpServlet {
 			 String url = "jdbc:mariadb://localhost/examen1718-1ev-sigurros";
 			 conn = DriverManager.getConnection(url, userName, password);
 			sentencia = conn.createStatement();
+			String tema= request.getParameter("temas");
 			ResultSet rset = sentencia.executeQuery(consultaComprobacion);
 			if (!rset.isBeforeFirst() ) {    
-				response.sendRedirect(contexto.getContextPath() + "/Login");
+				System.out.println("No hay resultados");
 			}else {
-				ResultSet rset2 = sentencia.executeQuery(consulta);
-				out.println("<form action='" + contexto.getContextPath() + "/Borrar" + "' method='post'>");
-				 out.println("<select name='temas'>");
-				 while(rset2.next()) {
-				 out.println("<option value="+rset2.getString("id")+">"+rset2.getString("nombre_e")+"</option> ");
-				 }
-				 out.println("</select>");  
-				 out.println("<input type='submit' value='Borrar'>");
-				 out.println("</form>");   
-				 
-				  //sentencia.executeQuery("DELETE FROM temas WHERE id = '"++"'");
-					//if(UserSesion!=null) {
-						//session.invalidate();
-					//}
-					//response.sendRedirect(contexto.getContextPath() + "/Login?Borrado=true");
+				  rset.next();
+				  sentencia.executeQuery("DELETE FROM temas WHERE id = '"+tema+"'");
+				  response.sendRedirect(contexto.getContextPath() + "/Baja");
 			}
 			
 		}catch (Exception e) {
@@ -73,7 +60,10 @@ public class adminBaja extends HttpServlet {
 
 	
 	
+
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
 	}
 
