@@ -57,7 +57,7 @@ public class Mostrar_Detalle extends HttpServlet {
 				response.sendRedirect(contexto.getContextPath() + "/Login");
 			}else {
 				Usuario usuario=(Usuario)session.getAttribute("usuario");
-				out.println("<h1>Sesion iniciada por "+usuario.getLogin()+"</h1>");
+				out.println("<h1>Sesion iniciada por "+usuario.getNombre()+"</h1>");
 			}
 		  //parametro recibido de la request id producto
 		  String idproducto = request.getParameter("idproducto");

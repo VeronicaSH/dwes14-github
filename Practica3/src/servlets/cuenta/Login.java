@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modelo.Producto;
 import modelo.Usuario;
 
 
@@ -39,6 +41,10 @@ public class Login extends HttpServlet {
 			if ((session.getAttribute("login") != null)) { // L2
 				response.sendRedirect(contexto.getContextPath() + "/"); // L3
 			}
+			//creacion del carrito
+			ArrayList <Producto> carrito=new ArrayList<Producto>();
+			//añadimos el carrito a la sesion
+			session.setAttribute("carrito",carrito);
 		}
 		else { // no hay sesión iniciada
 			if (request.getMethod().equals("POST")) { 

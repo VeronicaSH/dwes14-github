@@ -45,6 +45,7 @@ public class Cuenta extends HttpServlet {
 			
 			out.println("<li>Descripción: "+usuario.getDireccion());
 			out.println("</ul>");
+			out.println("<a href=\""+contexto.getContextPath()+"/Mostrarproductos\"<button>Volver</button></a>");
 			out.println("<a href=\""+contexto.getContextPath()+"/Logout\"<button>Cerrar Sesión</button></a>");
 			out.println("</body></html>");
 		}

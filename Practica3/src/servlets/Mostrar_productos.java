@@ -47,6 +47,7 @@ public class Mostrar_productos extends HttpServlet {
 				  String url = "jdbc:mariadb://localhost/supermercado";
 				  conn = DriverManager.getConnection(url, userName, password);
 				  String img="./img/productos/";
+				  String carro="./img/carrito1.png";
 				  String familia="";
 				  
 				  //Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
@@ -59,7 +60,7 @@ public class Mostrar_productos extends HttpServlet {
 						response.sendRedirect(contexto.getContextPath() + "/Login");
 					}else {
 						Usuario usuario=(Usuario)session.getAttribute("usuario");
-						out.println("<h1>Sesion iniciada por "+usuario.getLogin()+"</h1>");
+						out.println("<h1>Sesion iniciada por <a href='" + contexto.getContextPath() + "/Cuenta'>"+usuario.getNombre()+"</a></h1>");
 					}
 				  //PARAMETRO DE FAMILIA
 				  out.println("<table>");
@@ -68,11 +69,12 @@ public class Mostrar_productos extends HttpServlet {
 					  String consulta2 = "SELECT * from producto WHERE familia="+familia+"";
 					  ResultSet rset2 = sentencia.executeQuery(consulta2);
 					  out.println("<h1>"+familia+"</h1>");
-					  out.println("<tr>"+"<td>Nombre</td>"+"<td>Marca</td>"+"<td>Imagen</td>"+"</tr>" );
+					  out.println("<tr>"+"<td>Nombre</td>"+"<td>Marca</td>"+"<td>Imagen</td>"+"<td>Añadir</td>"+"</tr>" );
 					  while(rset2.next()) {
 						  out.println("<tr>" + "<td><a href='./MostrarDetalle?idproducto="+rset2.getString("idproducto")+"'>"+rset2.getString("nombre")+"</a></td> "+ 
 								  "<td>"+ rset2.getString("marca")+"</td>"
-								  + "<td> <img src='"+img+ rset2.getString("imagen") +"' width='100px'></td></tr>");
+								  + "<td> <img src='"+img+ rset2.getString("imagen") +"' width='100px'></td>"+
+								  "<td><a href="+contexto.getContextPath() + "/AniadirCesta'>"+ "<img src='"+carro+"'width='100px'></td>"+"</tr>");
 					  }
 				  }else {
 					
