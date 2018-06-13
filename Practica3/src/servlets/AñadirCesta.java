@@ -49,7 +49,7 @@ public class AñadirCesta extends HttpServlet {
 				  String password = "alumno";
 				  String url = "jdbc:mariadb://localhost/supermercado";
 				  conn = DriverManager.getConnection(url, userName, password);
-				  String id="";
+				  String idproducto="";
 				  
 				  //Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 				  sentencia = conn.createStatement();
@@ -62,20 +62,18 @@ public class AñadirCesta extends HttpServlet {
 					}
 					//PARAMETRO IDPRODUCTO
 					if(request.getParameter("idproducto")!=null && request.getParameter("idproducto")!="" ) {
-						id=request.getParameter("idproducto");
-						String consulta3="SELECT * FROM producto WHERE idproducto="+id+"";
+						idproducto=request.getParameter("idproducto");
+						String consulta3="SELECT * FROM producto WHERE idproducto="+idproducto+"";
 						ResultSet rset3 = sentencia.executeQuery(consulta3);
 						rset3.next();
 						Producto compra=new Producto(rset3.getInt("idProducto"), rset3.getString("nombre"), rset3.getString("marca"),  rset3.getInt("precio"),  rset3.getInt("stock"));
 						//RECUPERAR LA SESION DEL CARRITO
-						if(session!=null) {
+						
 						ArrayList <Producto> carrito=(ArrayList<Producto>) session.getAttribute("carrito");
 						carrito.add(compra);
 						//String referrer = request.getHeader("referer");
 						response.sendRedirect(contexto.getContextPath()+"/Login");
-						}else {
-							System.out.print("NO ENTRA");
-						}
+						
 					}else {
 						System.out.print("NO ENTRA");
 					}
