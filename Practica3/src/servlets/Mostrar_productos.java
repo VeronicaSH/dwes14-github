@@ -49,6 +49,7 @@ public class Mostrar_productos extends HttpServlet {
 				  String img="./img/productos/";
 				  String carro="./img/carrito1.png";
 				  String familia="";
+				  String idProducto="";
 				  
 				  //Paso 3: Crear sentencias SQL, utilizando objetos de tipo Statement
 				  sentencia = conn.createStatement();
@@ -62,6 +63,7 @@ public class Mostrar_productos extends HttpServlet {
 						Usuario usuario=(Usuario)session.getAttribute("usuario");
 						out.println("<h1>Sesion iniciada por <a href='" + contexto.getContextPath() + "/Cuenta'>"+usuario.getNombre()+"</a></h1>");
 					}
+				  
 				  //PARAMETRO DE FAMILIA
 				  out.println("<table>");
 				  if(request.getParameter("familia")!=null && request.getParameter("familia")!="" ) {
@@ -74,7 +76,7 @@ public class Mostrar_productos extends HttpServlet {
 						  out.println("<tr>" + "<td><a href='./MostrarDetalle?idproducto="+rset2.getString("idproducto")+"'>"+rset2.getString("nombre")+"</a></td> "+ 
 								  "<td>"+ rset2.getString("marca")+"</td>"
 								  + "<td> <img src='"+img+ rset2.getString("imagen") +"' width='100px'></td>"+
-								  "<td><a href="+contexto.getContextPath() + "/AniadirCesta'>"+ "<img src='"+carro+"'width='100px'></td>"+"</tr>");
+								  "<td><a href="+contexto.getContextPath() + "/AniadirCesta?idproducto="+rset2.getString("idproducto")+">"+ "<img src='"+carro+"'width='100px'></td>"+"</tr>");
 					  }
 				  }else {
 					

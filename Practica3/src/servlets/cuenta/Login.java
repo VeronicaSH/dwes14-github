@@ -45,6 +45,7 @@ public class Login extends HttpServlet {
 			ArrayList <Producto> carrito=new ArrayList<Producto>();
 			//añadimos el carrito a la sesion
 			session.setAttribute("carrito",carrito);
+			System.out.print("carrito creado");
 		}
 		else { // no hay sesión iniciada
 			if (request.getMethod().equals("POST")) { 
